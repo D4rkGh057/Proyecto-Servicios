@@ -12,10 +12,10 @@ import java.util.List;
 public class ApiEstudiante {
     @Autowired
     private IEstudianteRepository estudianteRepository;
-    @GetMapping("/")
-    public String index(){
-        return "index";
-    }
+//    @GetMapping("/")
+//    public String index(){
+//        return "index";
+//    }
 
     @GetMapping("/all")
     public List<Estudiante> getAll(){

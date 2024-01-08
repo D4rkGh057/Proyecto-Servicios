@@ -8,12 +8,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <title>Document</title>
+    <title>Usuario</title>
 </head>
 <body>
 
+<button type="button" class="btn btn-warning btnAdd">
+    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Cerrar Sesion</a>
+</button>
 <div class="table-responsive">
-    <table class="table table-stripes table-bordered text-center table-dark" id="tblUsers">
+    <table class="table table-stripes table-bordered text-center table-dark" id="tblUsers2">
         <thead>
         <tr>
             <th>Cedula</th>
@@ -21,12 +24,34 @@
             <th>Apellido</th>
             <th>Direccion</th>
             <th>Telefono</th>
-            <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
-    <script src="functions.js"></script>
+</div>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: "http://localhost:4444/rest/all",
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    var html = '';
+                    for (var i = 0; i < data.length; i++) {
+                        html += '<tr>';
+                        html += '<td>' + data[i].cedula + '</td>';
+                        html += '<td>' + data[i].nombre + '</td>';
+                        html += '<td>' + data[i].apellido + '</td>';
+                        html += '<td>' + data[i].direccion + '</td>';
+                        html += '<td>' + data[i].telefono + '</td>';
+                        html += '</tr>';
+                    }
+                    $("#tblUsers2 tbody").html(html);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

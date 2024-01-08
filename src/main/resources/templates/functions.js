@@ -80,26 +80,26 @@ $(document).ready(function() {
 
 function loadUsers() {
     $.ajax({
-    url: "http://localhost:4444/rest/all",
-    type: "GET",
-    dataType: "json",
-    success: function(data) {
-    console.log(data);
-        var html = '';
-    for (var i = 0; i < data.length; i++) {
-    html += '<tr>';
-    html += '<td>' + data[i].cedula + '</td>';
-    html += '<td>' + data[i].nombre + '</td>';
-    html += '<td>' + data[i].apellido + '</td>';
-    html += '<td>' + data[i].direccion + '</td>';
-    html += '<td>' + data[i].telefono + '</td>';
-    html += '<td>' +
-        "<button type='button' class='btn btn-primary btnEdit' data-bs-toggle='modal' data-bs-target='#editUser'>Editar Usuario</button>" +
-        "<button type='button' class='btn btn-warning btnDel'>Eliminar Usuario</button>" +
-    '</td>';
-    html += '</tr>';
-    }
-    $("#tblUsers tbody").html(html);
-    }
+        url: "http://localhost:4444/rest/all",
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+            var html = '';
+            for (var i = 0; i < data.length; i++) {
+                html += '<tr>';
+                html += '<td>' + data[i].cedula + '</td>';
+                html += '<td>' + data[i].nombre + '</td>';
+                html += '<td>' + data[i].apellido + '</td>';
+                html += '<td>' + data[i].direccion + '</td>';
+                html += '<td>' + data[i].telefono + '</td>';
+                html += '<td>' +
+                    "<button type='button' class='btn btn-primary btnEdit' data-bs-toggle='modal' data-bs-target='#editUser'>Editar Usuario</button>" +
+                    "<button type='button' class='btn btn-warning btnDel'>Eliminar Usuario</button>" +
+                    '</td>';
+                html += '</tr>';
+            }
+            $("#tblUsers tbody").html(html);
+        }
     });
 }

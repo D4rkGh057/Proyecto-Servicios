@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteCond %{HTTP_REFERER} !^https://servicios5sw\.000webhostapp\.com/ [NC]
+RewriteCond %{HTTP_REFERER} !^http://localhost:4444/ [NC]
+RewriteRule ^ - [F]

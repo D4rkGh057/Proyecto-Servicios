@@ -116,6 +116,48 @@
 
     });
 
+function validarCedulaEcuatoriana(cedula) {
+    // Verificar que la cédula tenga 10 dígitos
+    if (cedula.length !== 10) {
+        return false;
+    }
+
+    // Extraer los dos primeros dígitos de la cédula y verificar que se encuentren entre 1 y 24
+    var provincia = parseInt(cedula.substr(0, 2));
+    if (provincia < 1 || provincia > 24) {
+        return false;
+    }
+
+    // Extraer el último dígito de la cédula
+    var ultimoDigito = parseInt(cedula.substr(9, 1));
+
+    // Extraer los nueve primeros dígitos de la cédula y aplicar el algoritmo del módulo 10
+    var digitos = cedula.substr(0, 9).split('').map(Number);
+    var suma = digitos.reduce(function(acumulador, valor, indice) {
+        valor *= (indice % 2 === 0) ? 2 : 1;
+        valor -= (valor > 9) ? 9 : 0;
+        return acumulador + valor;
+    }, 0);
+
+    // Calcular el dígito verificador
+    var digitoVerificador = 10 - (suma % 10);
+    digitoVerificador = (digitoVerificador === 10) ? 0 : digitoVerificador;
+
+    // Verificar que el dígito verificador sea igual al último dígito de la cédula
+    return digitoVerificador === ultimoDigito;
+}
+
+    function validarLongitud(input) {
+    if(input.value.length > 10) {
+        input.value = input.value.slice(0, 10);
+    }
+}
+
+    function validarSoloLetras(input) {
+    var regex = /[^a-z]/gi;
+    input.value = input.value.replace(regex, "");
+}
+
     function loadUsers() {
         $.ajax({
             url: "/rest/all",
@@ -152,11 +194,11 @@
             </div>
             <div class="modal-body">
                 <form id="addUserForm">
-                    <input class="form-control mb-3" type="text" name="cedula" placeholder="Cédula" id="cedula">
-                    <input class="form-control mb-3" type="text" name="nombre" placeholder="Nombre" id="nombre">
-                    <input class="form-control mb-3" type="text" name="apellido" placeholder="Apellido" id="apellido">
+                    <input class="form-control mb-3" type="number" name="cedula" placeholder="Cédula" id="cedula" onchange="if (!validarCedulaEcuatoriana(this.value)) { alert('Cédula inválida'); this.value = ''; }">
+                    <input class="form-control mb-3" type="text" name="nombre" placeholder="Nombre" id="nombre" oninput="validarSoloLetras(this)">
+                    <input class="form-control mb-3" type="text" name="apellido" placeholder="Apellido" id="apellido" oninput="validarSoloLetras(this)">
                     <input class="form-control mb-3" type="text" name="direccion" placeholder="direccion" id="direccion">
-                    <input class="form-control mb-3" type="text" name="telefono" placeholder="Teléfono" id="telefono">
+                    <input class="form-control mb-3" type="number" name="telefono" placeholder="Teléfono" id="telefono" oninput="validarLongitud(this)">
                     <input type="submit" data-bs-dismiss="modal" value="Añadir Usuario" class="btn btn-success">
                 </form>
             </div>
@@ -172,11 +214,11 @@
             </div>
             <div class="modal-body">
                 <form id="editUserForm">
-                    <input class="form-control mb-3" type="text" name="cedula" placeholder="Cédula" id="ecedula" readonly>
-                    <input class="form-control mb-3" type="text" name="nombre" placeholder="Nombre" id="enombre">
-                    <input class="form-control mb-3" type="text" name="apellido" placeholder="Apellido" id="eapellido">
+                    <input class="form-control mb-3" type="number" name="cedula" placeholder="Cédula" id="ecedula" readonly>
+                    <input class="form-control mb-3" type="text" name="nombre" placeholder="Nombre" id="enombre" oninput="validarSoloLetras(this)">
+                    <input class="form-control mb-3" type="text" name="apellido" placeholder="Apellido" id="eapellido" oninput="validarSoloLetras(this)">
                     <input class="form-control mb-3" type="text" name="direccion" placeholder="direccion" id="edireccion">
-                    <input class="form-control mb-3" type="text" name="telefono" placeholder="Teléfono" id="etelefono">
+                    <input class="form-control mb-3" type="number" name="telefono" placeholder="Teléfono" id="etelefono" oninput="validarLongitud(this)">
                     <input type="submit" data-bs-dismiss="modal" value="Editar Usuario" class="btn btn-success">
                 </form>
             </div>

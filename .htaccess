@@ -1,4 +1,4 @@
 RewriteEngine On
 RewriteCond %{HTTP_REFERER} !^https://servicios5sw\.000webhostapp\.com/ [NC]
-RewriteCond %{HTTP_REFERER} !^http://localhost:4444/ [NC]
+RewriteCond %{HTTP_REFERER} !^https://3fa3-192-188-46-22.ngrok-free.app/ [NC]
 RewriteRule ^ - [F]

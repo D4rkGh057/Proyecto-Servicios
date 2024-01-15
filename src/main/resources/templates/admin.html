@@ -53,7 +53,7 @@
                 "telefono": telefono
             };
             $.ajax({
-                url: "http://localhost:4444/rest/save/" + cedula,
+                url: "/rest/save/" + cedula,
                 type: "POST",
                 dataType: "json",
                 contentType: "application/json",
@@ -89,7 +89,7 @@
                 "telefono": telefono
             };
             $.ajax({
-                url: "http://localhost:4444/rest/edit/" + cedula,
+                url: "/rest/edit/" + cedula,
                 type: "PUT",
                 dataType: "json",
                 contentType: "application/json",
@@ -106,7 +106,7 @@
 
             var cedula = currentRow.find("td:eq(0)").text();
             $.ajax({
-                url: "http://localhost:4444/rest/delete/" + cedula,
+                url: "/rest/delete/" + cedula,
                 type: "DELETE",
                 success: function(data) {
                     loadUsers();
@@ -118,7 +118,7 @@
 
     function loadUsers() {
         $.ajax({
-            url: "http://localhost:4444/rest/all",
+            url: "/rest/all",
             type: "GET",
             dataType: "json",
             success: function (data) {
@@ -183,6 +183,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="functions.js"></script>
+<!--<script type="text/javascript" src="functions.js"></script>-->
 </body>
 </html>

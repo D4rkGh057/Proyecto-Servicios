@@ -15,7 +15,7 @@ $(document).ready(function() {
     "telefono": telefono
     };
         $.ajax({
-        url: "http://localhost:4444/rest/save/" + cedula,
+        url: "/rest/save/" + cedula,
         type: "POST",
         dataType: "json",
         contentType: "application/json",
@@ -51,7 +51,7 @@ $(document).ready(function() {
         "telefono": telefono
         };
             $.ajax({
-            url: "http://localhost:4444/rest/edit/" + cedula,
+            url: "/rest/edit/" + cedula,
             type: "PUT",
             dataType: "json",
             contentType: "application/json",
@@ -68,7 +68,7 @@ $(document).ready(function() {
 
         var cedula = currentRow.find("td:eq(0)").text();
         $.ajax({
-            url: "http://localhost:4444/rest/delete/" + cedula,
+            url: "/rest/delete/" + cedula,
             type: "DELETE",
             success: function(data) {
              loadUsers();
@@ -80,7 +80,7 @@ $(document).ready(function() {
 
 function loadUsers() {
     $.ajax({
-        url: "http://localhost:4444/rest/all",
+        url: "/rest/all",
         type: "GET",
         dataType: "json",
         success: function (data) {
